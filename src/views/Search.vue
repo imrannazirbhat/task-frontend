@@ -1,34 +1,23 @@
 <template>
   <div class="container" v-if="shows">
-
- <div  >
-    
-      <ShowCard v-for="(show, i) in shows" 
-                  :key="i" :show="show"/>
-
-      
-</div>
-
+    <ShowCard v-for="show in shows" :key="show.show.id" :show="show.show"/>
   </div>
 </template>
 
-
-
 <script>
 // @ is an alias to /src
-const axios = require('axios');
 import ShowCard from '@/components/ShowCard.vue'
 
+const axios = require('axios');
 
 export default {
-  name: 'Home',
+  name: 'Search',
   components: {
     ShowCard
   },
   data() { 
     return {
-      shows: null,
-      page: 1
+      shows: null
     }
   },
   props: {
@@ -44,22 +33,16 @@ export default {
     
     fetchData() {
 
-     let api = "http://api.tvmaze.com/shows?page=" + this.page;
-    
+    console.log("query", this.$route.params.query)
+    let api = "http://api.tvmaze.com/search/shows?q=" + this.$route.params.query;
+      
+
      axios.get(api).then((response) => {
 
         console.log(response.data);
         this.shows = response.data
-      
+
       })
-    },
-
-    checkClass(index) {
-
-      return {
-        class: ((index+1) % 3 == 0)
-      }
-
     }
   }
   
