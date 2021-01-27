@@ -1,4 +1,4 @@
-# hello-world
+# task-frontend
 
 ## Project setup
 ```
