@@ -5,7 +5,7 @@
   <div v-if="show && (viewOption == 1)" class="card mb-3" style="margin:2rem">
   <div class="row g-0">
     <div class="col-md-4">
-      <img v-if="show.image" :src="show.image.medium" alt="...">
+      <img v-if="show.image" :src="show.image.medium" :alt="show.name">
     </div>
     <div class="col-md-8">
       <div class="card-body" style="padding-left: 40px;">
@@ -17,7 +17,7 @@
   </div>
 
   <div v-if="show && (viewOption == 2)" class="card float-left" style="width: 18rem;margin:2rem" :key="show.id">
-      <img v-if="show.image" :src="show.image.medium" class="card-img-top" alt="...">
+      <img v-if="show.image" :src="show.image.medium" class="card-img-top" :alt="show.name">
       <div class="card-body">
         <p><small>{{show.name}}</small></p>
         <p class="card-text" v-html="show.type"></p>
