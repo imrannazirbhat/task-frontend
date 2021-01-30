@@ -11,6 +11,12 @@
 
     <ShowCard v-for="(show, i) in shows" :key="i" :show="show"/>
 
+    <br/><br/>
+
+    <div class="alert alert-danger" role="alert" v-if="error">
+      {{error}}
+    </div>
+
   </div>
 
 </template>
@@ -35,7 +41,8 @@ export default {
       shows: [],
       page: 1,
       query: null,
-      view: 1
+      view: 1, 
+      error: null
     }
   },
   created: function () {
@@ -110,12 +117,16 @@ export default {
 
      }).then((response) => {
 
+        
         if(response.data) {
           app.shows = (app.shows).concat(response.data)
           app.page++
         }
       
       })
+      .catch(err => {
+          app.error = err.message
+      });
     }
 
   }
